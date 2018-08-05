@@ -30,7 +30,7 @@ export default class Pagination extends Component {
 
     render() {
         return (
-            <ul className={'pagination '+styles.pagingList}>
+            <ul className={'pagination ' + styles.pagingList}>
                 {this.renderPagerList()}
             </ul>
         )
@@ -39,5 +39,6 @@ export default class Pagination extends Component {
 
 Pagination.propTypes = {
     totalItemsCount: PropTypes.number.isRequired,
-    itemsCountPerPage: PropTypes.number.isRequired
+    itemsCountPerPage: PropTypes.number.isRequired,
+    pagerClick: PropTypes.func
 }

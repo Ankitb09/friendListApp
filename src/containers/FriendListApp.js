@@ -28,12 +28,14 @@ class FriendListApp extends Component {
     const { currentPage, listPerPage } = this.state;
     const { friendlist: { friendsById } } = this.props;
     const totalPageLength = friendsById.length;
-    // Logic for displaying todos
-    const indexOfLastTodo = currentPage * listPerPage;
-    const indexOfFirstTodo = indexOfLastTodo - listPerPage;
-    const currentList = friendsById.slice(indexOfFirstTodo, indexOfLastTodo);
-    
-    const newId = friendsById[friendsById.length - 1].id + 1;
+
+    // Logic for displaying Friend list items per page
+    const indexOfLastItem = currentPage * listPerPage;
+    const indexOfFirstItem = indexOfLastItem - listPerPage;
+    const currentList = friendsById.slice(indexOfFirstItem, indexOfLastItem);
+
+    // creating id, to be passed as props to AddFriendInput
+    const newId = friendsById[totalPageLength - 1].id + 1;
 
     const actions = {
       addFriend: this.props.addFriend,
@@ -48,10 +50,13 @@ class FriendListApp extends Component {
           <AddFriendInput addFriend={actions.addFriend} newId={newId} />
           <FriendList friends={currentList} actions={actions} />
         </div>
-        <Pagination
-          totalItemsCount={totalPageLength}
-          itemsCountPerPage={this.state.listPerPage}
-          pagerClick={this.onPagerClick} />
+        {
+          friendsById.length > 2 && <Pagination
+            totalItemsCount={totalPageLength}
+            itemsCountPerPage={this.state.listPerPage}
+            pagerClick={this.onPagerClick} />
+        }
+
       </div>
     );
   }

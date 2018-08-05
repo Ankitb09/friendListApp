@@ -1,19 +1,15 @@
-## Usage
+# Welcome to Friend List App
 
-```
-yarn install
-yarn start
-open http://localhost:3000
-```
+##### Steps to Run Project
+- yarn install
+- yarn start
+- open http://localhost:3000
 
-## Tasks
+###### For test cases run:-
+- yarn test
 
-- Please add pagination support to the list when there are more than 2 entries
-- Please add option to select sex of a friend male/female and display it
-- Please add tests using your preferred testing tool (jest, mocha, should.js ...)
 
-## Objectives
-
-- You have received a working example so please do not upgrade any packages unless you really have to.
-- Please check for small things like syntax errors, since details matter.
-- Please deliver something that works, non working project is an automatic disqualification
+## Tasks to be done:- 
+ - [x] Add pagination support to the list when there are more than 2 entries
+ - [x] Add option to select sex of a friend male/female and display it
+ - [x] Please add tests cases.
