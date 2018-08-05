@@ -1,0 +1,18 @@
+:local(.pagingList) {
+    display: block;
+    text-align: center
+}
+
+:local(.pagingList li) {
+    display: inline-block;
+    margin: 0 5px;
+    border-radius: 2px
+}
+
+:local(.pagingList >li:last-child>a) {
+    border-radius: 2px;
+}
+
+:local(.pagingList a) {
+    border-radius: 2px
+}
