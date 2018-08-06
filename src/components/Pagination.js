@@ -17,7 +17,7 @@ export default class Pagination extends Component {
         }
         return pageNumbers.map((number) => {
             return (
-                <li key={number}>
+                <li key={number} className={this.props.activePage === number ? "active" : " "}>
                     <a
                         id={number}
                         onClick={this.props.pagerClick}>
@@ -40,5 +40,6 @@ export default class Pagination extends Component {
 Pagination.propTypes = {
     totalItemsCount: PropTypes.number.isRequired,
     itemsCountPerPage: PropTypes.number.isRequired,
-    pagerClick: PropTypes.func
+    activePage: PropTypes.number.isRequired,
+    pagerClick: PropTypes.func.isRequired
 }

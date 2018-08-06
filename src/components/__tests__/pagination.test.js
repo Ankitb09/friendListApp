@@ -9,6 +9,7 @@ describe("<Pagination />", () => {
     const props = {
         totalItemsCount: 22,
         itemsCountPerPage: 2,
+        activePage: 1,
         pagerClick: () => { }
     };
 

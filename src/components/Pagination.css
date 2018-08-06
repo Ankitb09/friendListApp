@@ -9,7 +9,8 @@
     border-radius: 2px
 }
 
-:local(.pagingList >li:last-child>a) ,:local(.pagingList >li:first-child>a) {
+:local(.pagingList >li:last-child>a),
+:local(.pagingList >li:first-child>a) {
     border-radius: 2px;
 }
 
@@ -17,3 +18,4 @@
     border-radius: 2px;
     cursor: pointer;
 }
+

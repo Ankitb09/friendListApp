@@ -17,6 +17,18 @@ class FriendListApp extends Component {
     this.onPagerClick = this.onPagerClick.bind(this);
   }
 
+  componentDidUpdate() {
+    const indexOfLastItem = this.state.currentPage * this.state.listPerPage;
+    const indexOfFirstItem = indexOfLastItem - this.state.listPerPage;
+    const currentList = this.props.friendlist.friendsById.slice(indexOfFirstItem, indexOfLastItem);
+    if (this.state.currentPage > 1 && currentList.length === 0) {
+      this.setState({
+        currentPage: this.state.currentPage - 1 
+      })
+    }
+  }
+
+
   onPagerClick(event) {
     this.setState({
       currentPage: Number(event.target.id)
@@ -33,7 +45,7 @@ class FriendListApp extends Component {
     const indexOfLastItem = currentPage * listPerPage;
     const indexOfFirstItem = indexOfLastItem - listPerPage;
     const currentList = friendsById.slice(indexOfFirstItem, indexOfLastItem);
-
+  
     // creating id, to be passed as props to AddFriendInput
     const newId = friendsById[totalPageLength - 1].id + 1;
 
@@ -53,6 +65,7 @@ class FriendListApp extends Component {
         {
           friendsById.length > 2 && <Pagination
             totalItemsCount={totalPageLength}
+            activePage={currentPage}
             itemsCountPerPage={this.state.listPerPage}
             pagerClick={this.onPagerClick} />
         }
