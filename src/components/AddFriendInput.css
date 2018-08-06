@@ -4,6 +4,7 @@
 
 :local(.addFriendFormGroup) {
     width: 68%;
+    display: inline-block;
 }
 
 :local(.addFriendFormGroup + .addFriendFormGroup) {
