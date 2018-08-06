@@ -17,13 +17,14 @@ class FriendListApp extends Component {
     this.onPagerClick = this.onPagerClick.bind(this);
   }
 
+  // updating value currentPage (if we delete all items on current page)
   componentDidUpdate() {
     const indexOfLastItem = this.state.currentPage * this.state.listPerPage;
     const indexOfFirstItem = indexOfLastItem - this.state.listPerPage;
     const currentList = this.props.friendlist.friendsById.slice(indexOfFirstItem, indexOfLastItem);
     if (this.state.currentPage > 1 && currentList.length === 0) {
       this.setState({
-        currentPage: this.state.currentPage - 1 
+        currentPage: this.state.currentPage - 1,
       })
     }
   }
@@ -36,18 +37,20 @@ class FriendListApp extends Component {
   }
 
   render() {
-
+    
     const { currentPage, listPerPage } = this.state;
     const { friendlist: { friendsById } } = this.props;
     const totalPageLength = friendsById.length;
-
+    let newId;
     // Logic for displaying Friend list items per page
     const indexOfLastItem = currentPage * listPerPage;
     const indexOfFirstItem = indexOfLastItem - listPerPage;
     const currentList = friendsById.slice(indexOfFirstItem, indexOfLastItem);
-  
+
     // creating id, to be passed as props to AddFriendInput
-    const newId = friendsById[totalPageLength - 1].id + 1;
+    if (totalPageLength > 0) {
+      newId = friendsById[totalPageLength - 1].id + 1;
+    }
 
     const actions = {
       addFriend: this.props.addFriend,
@@ -63,7 +66,7 @@ class FriendListApp extends Component {
           <FriendList friends={currentList} actions={actions} />
         </div>
         {
-          friendsById.length > 2 && <Pagination
+          friendsById.length > listPerPage && <Pagination
             totalItemsCount={totalPageLength}
             activePage={currentPage}
             itemsCountPerPage={this.state.listPerPage}

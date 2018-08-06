@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import {combineReducers, createStore,applyMiddleware} from 'redux';
+import {combineReducers, createStore} from 'redux';
 import { Provider } from 'react-redux';
-import logger from 'redux-logger'
 
 import FriendListApp from './FriendListApp';
 import * as reducers from '../reducers';
 
 const reducer = combineReducers(reducers);
-const store = createStore(reducer, applyMiddleware(logger));
+const store = createStore(reducer);
 
 export default class App extends Component {
   render() {
