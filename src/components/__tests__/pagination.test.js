@@ -9,7 +9,7 @@ describe("<Pagination />", () => {
     const props = {
         totalItemsCount: 22,
         itemsCountPerPage: 2,
-        activePage: 1,
+        activePage: 3,
         pagerClick: () => { }
     };
 
@@ -22,6 +22,11 @@ describe("<Pagination />", () => {
         it("should have 'pagination' class", () => {
             const wrapper = mount(<Pagination {...props} />);
             expect(wrapper.find("ul").hasClass('pagination')).toBeTruthy();
+        });
+
+        it("should have active class", () => {
+            const wrapper = mount(<Pagination {...props} />);
+            expect(wrapper.find("ul").children().at(2).hasClass('active')).toBeTruthy();
         });
 
         it("renders the appropriate amount of children", () => {

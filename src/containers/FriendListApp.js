@@ -8,8 +8,8 @@ import Pagination from '../components/Pagination';
 
 class FriendListApp extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       currentPage: 1,
       listPerPage: 2
@@ -19,14 +19,20 @@ class FriendListApp extends Component {
 
   // updating value currentPage (if we delete all items on current page)
   componentDidUpdate() {
-    const indexOfLastItem = this.state.currentPage * this.state.listPerPage;
-    const indexOfFirstItem = indexOfLastItem - this.state.listPerPage;
-    const currentList = this.props.friendlist.friendsById.slice(indexOfFirstItem, indexOfLastItem);
+    const currentList = this.getCurrentList();
     if (this.state.currentPage > 1 && currentList.length === 0) {
       this.setState({
         currentPage: this.state.currentPage - 1,
       })
     }
+  }
+
+  // calculating current list of items based on pagination current page
+  getCurrentList() {
+    const indexOfLastItem = this.state.currentPage * this.state.listPerPage;
+    const indexOfFirstItem = indexOfLastItem - this.state.listPerPage;
+    const currentList = this.props.friendlist.friendsById.slice(indexOfFirstItem, indexOfLastItem);
+    return currentList;
   }
 
 
@@ -37,15 +43,12 @@ class FriendListApp extends Component {
   }
 
   render() {
-    
     const { currentPage, listPerPage } = this.state;
     const { friendlist: { friendsById } } = this.props;
     const totalPageLength = friendsById.length;
+    const currList = this.getCurrentList();
+
     let newId;
-    // Logic for displaying Friend list items per page
-    const indexOfLastItem = currentPage * listPerPage;
-    const indexOfFirstItem = indexOfLastItem - listPerPage;
-    const currentList = friendsById.slice(indexOfFirstItem, indexOfLastItem);
 
     // creating id, to be passed as props to AddFriendInput
     if (totalPageLength > 0) {
@@ -63,7 +66,7 @@ class FriendListApp extends Component {
         <div className={styles.friendListApp}>
           <h1>The FriendList</h1>
           <AddFriendInput addFriend={actions.addFriend} newId={newId} />
-          <FriendList friends={currentList} actions={actions} />
+          <FriendList friends={currList} actions={actions} />
         </div>
         {
           friendsById.length > listPerPage && <Pagination
